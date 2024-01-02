@@ -1,3 +1,16 @@
+:root {
+    --mainColor: #89216b;
+    --whiteColor: #ffffff;
+    --titleColor: #555555;
+    --labelColor: #333333;
+}
+
+body {
+    background: linear-gradient(to right, #da4453, var(--mainColor));
+    /* background-color: var(--mainColor); */
+}
+
 .bg-color {
-    background-color: #4c0bce;
+    background: linear-gradient(to right, #89216b,#f87481);
+    color: black;
 }

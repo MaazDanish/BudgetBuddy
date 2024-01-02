@@ -11,7 +11,7 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-color">
+    <nav class="navbar navbar-expand-lg navbar-white bg-color">
         <div class="container">
             <button type="button" class="btn profileLogo" data-bs-toggle="modal" data-bs-target="#exampleModal">
                 <!-- Profile Logo Button -->
@@ -58,19 +58,14 @@
                     </div>
                     <div id="editInfo" style="display: none;">
                         <label for="editName" class="pt-2">First Name</label>
-                        <input type="text" id="editFirstName" class="form-control mt-2" name="firstName">
-
-                        <label for="editName" class="pt-2">Last Name</label>
-                        <input type="text" id="editLastName" class="form-control mt-2" name="lastName">
+                        <input type="text" id="editname" class="form-control mt-2" name="firstName">
 
                         <label for="editEmail" class="pt-2">Email</label>
-                        <input type="email" id="editEmail" class="form-control mt-2" name="email">
+                        <input type="email" id="editemail" class="form-control mt-2" name="email">
 
                         <label for="editPhone" class="pt-2">Phone Number</label>
-                        <input type="tel" id="editPhone" class="form-control mt-2" name="phoneNumber">
+                        <input type="tel" id="editphone" class="form-control mt-2" name="phoneNumber">
 
-                        <label for="editAddress" class="pt-2">Address</label>
-                        <input type="text" id="editAddress" class="form-control mt-2" name="address">
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -84,7 +79,7 @@
     <!--  -------------------------------------------------------------------------------- -->
     <!-- LEADERBOARD MODEL START HERE  -->
 
-    <div class="modal fade bg-white" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel"
+    <div class="modal fade bg-color" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
         <div class="modal-dialog ">
             <div class="modal-content bg-danger">
@@ -118,16 +113,16 @@
             <!-- Left Part - Two Input Fields -->
             <form class="col-md-4  bg-dark" onsubmit="addXpense(event)">
                 <div class="form-group mt-4">
-                    <label for="inputData1" class="mb-2 text-info">Enter Xpense Price</label>
+                    <label for="inputData1" class="mb-2 text-white">Enter Xpense Price</label>
                     <input type="text" class="form-control" name="price" placeholder="Type something..." required>
                 </div>
                 <div class="form-group mt-4">
-                    <label for="inputData2" class="text-info mb-2">Enter Xpense Description </label>
+                    <label for="inputData2" class="text-white mb-2">Enter Xpense Description </label>
                     <input type="text" class="form-control " name="description" placeholder="Type something..."
                         required>
                 </div>
                 <div class="form-group mt-4">
-                    <label for="inputData2" class="text-info  mb-2">Enter Xpense Category</label>
+                    <label for="inputData2" class="text-white  mb-2">Enter Xpense Category</label>
                     <select class="form-control " name="category" required>
                         <option class="bg-dark text-white" value="food">Food</option>
                         <option class="bg-dark text-white" value="transportation">Transportation</option>
@@ -161,7 +156,7 @@
                     </select>
                 </div>
                 <div class="form-group mt-4 mb-4">
-                    <button type="submit" class="btn btn-info">Add Xpense </button>
+                    <button type="submit" class="btn btn-light">Add Xpense </button>
                 </div>
 
             </form>
@@ -171,11 +166,11 @@
                 <table class="table table-hover">
                     <thead>
                         <tr class="table-dark table-hover">
-                            <th class="text-info">Date</th>
-                            <th class="text-info">Xpense Description</th>
-                            <th class="text-info">Category</th>
-                            <th class="text-info">Price </th>
-                            <th class="text-info">Actions</th>
+                            <th class="text-white">Date</th>
+                            <th class="text-white">Xpense Description</th>
+                            <th class="text-white">Category</th>
+                            <th class="text-white">Price </th>
+                            <th class="text-white">Actions</th>
                         </tr>
                     </thead>
                     <tbody id="tbody">

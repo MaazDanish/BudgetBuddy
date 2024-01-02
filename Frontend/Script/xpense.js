@@ -10,12 +10,10 @@ async function toggleEdit(user) {
         }
 
         const user = await axios.get(`http://localhost:4444/BudgetBuddy/user/getUserInfo`, { headers });
-
-        document.getElementById('editFirstName').value = user.data.user.firstName;
-        document.getElementById('editLastName').value = user.data.user.lastName;
-        document.getElementById('editEmail').value = user.data.user.email;
-        document.getElementById('editPhone').value = user.data.user.phoneNumber;
-        document.getElementById('editAddress').value = user.data.user.address;
+        console.log(user);
+        document.getElementById('editname').value = user.data.user.name;
+        document.getElementById('editemail').value = user.data.user.email;
+        document.getElementById('editphone').value = user.data.user.phoneNumber;
     } catch (err) {
         console.log(err);
     }
@@ -24,13 +22,11 @@ async function toggleEdit(user) {
 // when user clicks on save changes button
 async function saveChanges() {
     try {
-        console.log(document.getElementById('editFirstName').value);
+        console.log(document.getElementById('editname').value);
         const userInfo = {
-            firstName: document.getElementById('editFirstName').value,
-            lastName: document.getElementById('editLastName').value,
-            email: document.getElementById('editEmail').value,
-            phoneNumber: document.getElementById('editPhone').value,
-            address: document.getElementById('editAddress').value
+            name: document.getElementById('editname').value,
+            email: document.getElementById('editemail').value,
+            phoneNumber: document.getElementById('editphone').value,
         }
 
         const headers = {
@@ -54,11 +50,11 @@ async function saveChanges() {
 // To display user information in toggle
 function displayUserInformation(user) {
     document.getElementById('userInfo').innerHTML = `
-    <p class="text-color"><h5>Name</h5> ${user.firstName}  ${user.lastName}</p>
+    <p class="text-color"><h5>Name</h5> ${user.name}  </p>
     <p class="text-color"><h5>Email</h5> ${user.email}</p>
     <p class="text-color"><h5>Phone Number</h5> ${user.phoneNumber}</p>
-    <p class="text-color"><h5>Address</h5> ${user.address}</p>
     `;
+
 }
 
 
@@ -179,11 +175,11 @@ async function displayXpenses(xpenses) {
         const td4 = document.createElement('td');
         const td5 = document.createElement('td');
 
-        td1.className = 'text-info'
-        td2.className = 'text-info'
-        td3.className = 'text-info'
-        td4.className = 'text-info'
-        td5.className = 'text-info'
+        td1.className = 'text-white'
+        td2.className = 'text-white'
+        td3.className = 'text-white'
+        td4.className = 'text-white'
+        td5.className = 'text-white'
 
         tr.className = 'table-dark';
 
@@ -194,7 +190,7 @@ async function displayXpenses(xpenses) {
 
         const deleteButton = document.createElement('input');
         deleteButton.type = 'button'
-        deleteButton.className = 'btn btn-info';
+        deleteButton.className = 'btn btn-light';
         deleteButton.value = 'Delete'
 
         const id = xpenses.id;
@@ -230,15 +226,16 @@ async function deleteXpense(id) {
 }
 
 // Logout 
-document.addEventListener('DOMContentLoaded', () => {
-    var logout = document.getElementById('logout');
+// document.addEventListener('DOMContentLoaded', () => {
+var logout = document.getElementById('logout');
 
-    logout.addEventListener('click', () => {
-        localStorage.removeItem('token');
-        localStorage.removeItem('ispremium');
-        window.location.href = './SignIn.html';
-    })
+logout.addEventListener('click', () => {
+    localStorage.removeItem('token');
+    localStorage.removeItem('ispremium');
+    // window.location.href = './SignIn.html';
+    window.location.href = './home.html';
 })
+// })
 
 //  Clear fields 
 function clearFields(event) {
@@ -300,8 +297,10 @@ async function showLeaderBoard() {
         }
 
         const res = await axios.get('http://localhost:4444/BudgetBuddy/buy-premium/leaderboard');
-
+        console.log(res, 'hi');
         let ans = res.data;
+
+        console.log(res);
 
         ans.sort((a, b) => b.expense - a.expense);
         for (var i = 0; i < ans.length; i++) {
@@ -310,7 +309,7 @@ async function showLeaderBoard() {
             const td1 = document.createElement('td');
             const td2 = document.createElement('td');
 
-            td1.textContent = `${ans[i].firstName} ${ans[i].lastName}`;
+            td1.textContent = `${ans[i].name} `;
             td2.textContent = `${ans[i].totalExpense}`
 
             tr.appendChild(td1)

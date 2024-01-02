@@ -2,10 +2,10 @@
 // To display user information in toggle
 function displayUserInformation(user) {
     document.getElementById('userInfo').innerHTML = `
-    <p><h5>Name</h5> ${user.firstName}  ${user.lastName} </p>
+    <p><h5>Name</h5> ${user.name} </p>
     <p><h5>Email</h5> ${user.email}</p>
-    <p><h5>Phone Number</h5> ${user.phoneNumber}</p>
-    <p><h5>Address</h5> ${user.address}</p>
+    <p><h5>Phone Number</h5> ${user.whiteumber}</p>
+    
 `;
 }
 
@@ -44,19 +44,19 @@ async function displayDTDXpense(expenses, obj) {
     var xpenseTableBody = document.getElementById('viewXpenseTableBody');
     xpenseTableBody.innerHTML = xpenseTableBody.innerHTML + `
     <tr class="table-dark">
-        <td class="text-danger">Today</td>
-        <td class="text-danger">${description}</td>
-        <td class="text-danger">${price}</td>
-        <td class="text-danger">${category}</td>
+        <td class="text-white">Today</td>
+        <td class="text-white">${description}</td>
+        <td class="text-white">${price}</td>
+        <td class="text-white">${category}</td>
     </tr>
     `
     var tfoot = document.getElementById('daily-tfoot');
     tfoot.innerHTML = `
     <tr>
-        <td class="text-danger">Total Expense</td>
+        <td class="text-white">Total Expense</td>
         <td></td>
         <td></td>
-        <td class="text-danger" id="todayTotal-Expense">${obj}</td>
+        <td class="text-white" id="todayTotal-Expense">${obj}</td>
     </tr>
     `
 }
@@ -66,8 +66,8 @@ async function weeklyXpenses(weekly) {
         weekly.data.dayNames.forEach(day => {
         weeklyXpenses.innerHTML = weeklyXpenses.innerHTML + `
         <tr class="table-dark">
-            <td class="text-danger">${day}</td>
-            <td class="text-danger">${weekly.data.dayWise[day]}</td>
+            <td class="text-white">${day}</td>
+            <td class="text-white">${weekly.data.dayWise[day]}</td>
         </tr>
         `
     })
@@ -75,8 +75,8 @@ async function weeklyXpenses(weekly) {
     var tfoot = document.getElementById('tfoot-weekly');
     tfoot.innerHTML = `
         <tr>
-            <td class="text-danger"><strong>Total Expense of this week</strong></td>
-            <td class="text-danger" id="weeeklyTotal-Expense">${weekly.data.Total}</td>
+            <td class="text-white"><strong>Total Expense of this week</strong></td>
+            <td class="text-white" id="weeeklyTotal-Expense">${weekly.data.Total}</td>
         </tr>
     `
 }
@@ -87,8 +87,8 @@ async function yearlyExpenses(yearly) {
         yearly.data.monthNames.forEach(month => {
         monthlyExpense.innerHTML = monthlyExpense.innerHTML + `
         <tr class="table-dark">
-            <td class="text-danger">${month}</td>
-            <td class="text-danger">${yearly.data.MonthlyTotals[month]}</td>
+            <td class="text-white">${month}</td>
+            <td class="text-white">${yearly.data.MonthlyTotals[month]}</td>
         </tr>
         `
     })
@@ -96,18 +96,18 @@ async function yearlyExpenses(yearly) {
     var tfoot = document.getElementById('tfoot-monthly');
     tfoot.innerHTML = `
     <tr>
-        <td class="text-danger"><strong>Total Expense of this Year</strong></td>
-        <td class="text-danger" id="yearlyTotal-Expense">${yearly.data.Total}</td>
+        <td class="text-white"><strong>Total Expense of this Year</strong></td>
+        <td class="text-white" id="yearlyTotal-Expense">${yearly.data.Total}</td>
     </tr>
     `
 
 }
 
 // Logout 
-document.addEventListener('DOMContentLoaded', () => {
+// document.addEventListener('DOMContentLoaded', () => {
     var logout = document.getElementById('logout');
     logout.addEventListener('click', () => {
         localStorage.removeItem('token');
-        window.location.href = './SignIn.html';
+        window.location.href = './home.html';
     })
-})
+// })

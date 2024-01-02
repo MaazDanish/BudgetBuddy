@@ -6,7 +6,8 @@ const User = require('../Models/signup');
 exports.postSignUpUser = async (req, res, next) => {
     try {
 
-        const { firstName, lastName, email, phoneNumber, password, address } = req.body;
+        // const { firstName, lastName, email, phoneNumber, password, address } = req.body;
+        const { name, email, phoneNumber, password } = req.body;
 
         const existUser = await User.findOne({ where: { email } });
 
@@ -20,12 +21,11 @@ exports.postSignUpUser = async (req, res, next) => {
 
         const newUser = await User.create({
 
-            firstName: firstName,
-            lastName: lastName,
+            name: name,
             email: email,
             phoneNumber: phoneNumber,
             password: hash,
-            address: address
+
         })
 
         res.status(200).json(newUser);
@@ -133,6 +133,7 @@ exports.getUserInformation = async (req, res, next) => {
 
 
         const user = await User.findOne({ where: { id: userId } });
+        console.log(user, 'user');
 
         if (!user) {
 
@@ -154,7 +155,7 @@ exports.updateUserInformation = async (req, res, next) => {
         const id = req.userID.userId;
 
 
-        const { firstName, lastName, email, phoneNumber, address } = req.body;
+        const { name, email, phoneNumber } = req.body;
 
         const user = await User.findOne({ where: { id: id } });
 
@@ -165,20 +166,14 @@ exports.updateUserInformation = async (req, res, next) => {
 
         }
 
-        if (firstName) {
-            user.firstName = firstName;
-        }
-        if (lastName) {
-            user.lastName = lastName;
+        if (name) {
+            user.name = name;
         }
         if (email) {
             user.email = email;
         }
         if (phoneNumber) {
             user.phoneNumber = phoneNumber;
-        }
-        if (address) {
-            user.address = address;
         }
 
         await user.save();

@@ -90,7 +90,7 @@ exports.updateTransactionStatus = async (req, res) => {
 exports.leaderboard = async (req, res, next) => {
     try {
         const users = await User.findAll({
-            attributes: ['id', 'firstName', 'lastName', 'totalExpense'],
+            attributes: ['id', 'name', 'totalExpense'],
             order: [['totalExpense', 'DESC']]
         })
         res.status(200).json(users);

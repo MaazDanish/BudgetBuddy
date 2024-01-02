@@ -16,13 +16,14 @@ async function signup(event) {
     event.preventDefault();
     try {
 
+        console.log(event.target.phoneNumber.value);
         const signup = {
             name: event.target.name.value,
             email: event.target.email.value,
+            phoneNumber: event.target.phoneNumber.value,
             password: event.target.password.value,
             confirmpassword: event.target.confirmpassword.value
         }
-
         const msg = document.getElementById('signupmsg');
         if (isValidPassword(event.target.password.value, event.target.confirmpassword.value)) {
             const user = await axios.post('http://localhost:4444/BudgetBuddy/user/signup', signup)
@@ -87,6 +88,7 @@ function isValidPassword(password, confirmpassword) {
 function clearFieldsOfSignup(event) {
     event.target.name.value = '';
     event.target.email.value = '';
+    event.target.phoneNumber.value = '';
     event.target.password.value = '';
     event.target.confirmpassword.value = '';
 }
@@ -109,7 +111,7 @@ async function signin(event) {
             password: event.target.password.value
         }
 
-        const res = await axios.post("http://localhost:4444/BudgetBuddy/user/signin", SignIn);
+        const res = await axios.post("http://localhost:4444/BudgetBuddy/user/signin", signin);
         clearFieldsOfSignin(event);
         if (res.status === 200) {
             localStorage.setItem('token', res.data.token);

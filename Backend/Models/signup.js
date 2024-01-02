@@ -9,11 +9,7 @@ const User = sequelize.define('user', {
         primaryKey: true
 
     },
-    firstName: {
-        type: Sequelize.STRING,
-        allowNull: false
-    },
-    lastName: {
+    name: {
         type: Sequelize.STRING,
         allowNull: false
     },
@@ -22,14 +18,12 @@ const User = sequelize.define('user', {
         allowNull: false
     },
     phoneNumber: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        allowNull: false
     },
     password: {
         type: Sequelize.STRING,
         allowNull: false
-    },
-    address: {
-        type: Sequelize.STRING
     },
     ispremiumuser: {
         type: Sequelize.STRING
