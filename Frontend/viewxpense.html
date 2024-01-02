@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BudgetBuddy : View Xpense</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="/Frontend/Style/viewxpense.css">
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-color">
+        <div class="container">
+            <button type="button" class="btn profileLogo" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                <!-- <li class="mt-4">profile</li> -->
+            </button>
+            <a href="/Frontend/xpense.html" class="ms-5 viewXpense">Home</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-between" id="navbarNav">
+                <ul class="navbar-nav">
+                </ul>
+                <ul class="navbar-nav">
+                    <li class="nav-item ps-2">
+                        <button class="btn  disabled downloadLogo" id="downloadbutton" type="button"></button>
+                    </li>
+                    <li class="nav-item ps-2">
+                        <button class="btn btn-danger ms-2 logo" type="button" id="logout"></button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- MODDLE FOR PROFILE  -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog ">
+            <div class="modal-content bg-color">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5 text-white" id="exampleModalLabel">Profile</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div id="userInfo">
+                        <!-- dynamically will added here -->
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--  INPUT START HERE -->
+    <div class="container mt-5 ">
+        <div class="row justify-content-center pt-3 ">
+            <div class="col-md-8">
+                <div class="table-responsive ">
+                    <table class="table table-hover">
+                        <thead>
+                            <h1 class="bg-dark text-white px-3 py-3 fontSize text-center">Today's Expenses</h1>
+                            <tr class="table-dark">
+                                <th class="text-danger">Date</th>
+                                <th class="text-danger">Description</th>
+                                <th class="text-danger">Amount</th>
+                                <th class="text-danger">Category</th>
+                                <!-- <th class="text-danger th-font">Total</th> -->
+                            </tr>
+                        </thead>
+                        <tbody id="viewXpenseTableBody">
+                            <!-- Your table rows go here -->
+
+                        </tbody>
+                        <tfoot class="table-dark" id="daily-tfoot">
+
+                        </tfoot>
+                    </table>
+                    <br><br>
+                    <!-- Weekly expens -->
+                    <table class="table table-hover">
+                        <thead>
+                            <h1 class="bg-dark text-white px-3 py-3 fontSize text-center">Weekly Expense</h1>
+                            <tr class="table-dark">
+                                <th class="text-danger">Day</th>
+                                <th class="text-danger">Total Expense</th>
+                            </tr>
+                        </thead>
+                        <tbody id="dailyXpenses">
+                            <!-- Your table rows go here -->
+
+                        </tbody>
+                        <tfoot class="table-dark" id="tfoot-weekly">
+                            <!-- Dynamically will added here -->
+                        </tfoot>
+                    </table>
+                    <br><br>
+                    <table class="table table-hover">
+                        <thead>
+                            <h1 class="bg-dark text-white px-3 py-3 fontSize text-center">Yearly Expense</h1>
+                            <tr class="table-dark">
+                                <th class="text-danger">Month</th>
+                                <th class="text-danger">Total Expense</th>
+                            </tr>
+                        </thead>
+                        <tbody id="monthlyExpense">
+                            <!-- Your table rows go here -->
+
+                        </tbody>
+                        <tfoot class="table-dark" id="tfoot-monthly">
+
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.4.0/axios.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"></script>
+    <script src="/Frontend/Script/viewxpense.js"></script>
+</body>
+
+</html>

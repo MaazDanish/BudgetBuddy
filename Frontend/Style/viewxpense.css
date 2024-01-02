@@ -1,0 +1,71 @@
+body {
+    background-color: #c8c8fa;
+}
+
+.bg-color {
+    background-color: #6f42c1;
+}
+
+nav {
+    background-color: black;
+}
+
+li {
+    list-style-type: none;
+    color: white;
+}
+
+a {
+    text-decoration: none;
+}
+
+.viewXpense {
+    color: white;
+}
+
+#userInfo {
+    color: white;
+}
+
+h5 {
+    color: black;
+}
+
+.labelStyle {
+    color: rgb(255, 0, 0);
+}
+
+.th-font {
+    font-size: 25px;
+}
+
+.logo {
+    background-image: url(/Frontend/Images/logout.jpg);
+    width: 40px;
+    height: 40px;
+    background-size: cover;
+    border-radius: 30px;
+    border: 2px solid white;
+}
+
+.profileLogo {
+    background-image: url(/Frontend/Images/Contact\ icon\ 3d\ vector\ illustration.jpg);
+    width: 40px;
+    height: 40px;
+    background-size: cover;
+    border-radius: 30px;
+    border: 2px solid white;
+}
+
+.downloadLogo {
+    background-image: url(/Frontend/Images/download.png);
+    width: 40px;
+    height: 40px;
+    background-size: cover;
+    border-radius: 30px;
+    border: 2px solid white;
+}
+
+.fontSize {
+    font-size: 20px;
+}

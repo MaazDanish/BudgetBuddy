@@ -1,0 +1,13 @@
+firstName, lastName, email, phoneNumber, password, address
+signup route = "http://localhost:4444/BudgetBuddy/user/signup"
+http://localhost:4444/BudgetBuddy/user/signin
+http://localhost:4444/BudgetBuddy/user/getUserInfo
+http://localhost:4444/BudgetBuddy/user/password/reset-password/${uuid}
+http://127.0.0.1:5500/Frontend/SignIn.html
+maazdanish
+s
+aa
+a
+A
+as
+Hindustan

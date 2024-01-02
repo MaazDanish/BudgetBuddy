@@ -1,0 +1,25 @@
+body{
+    background-color: #c8c8fa;
+    
+}
+.bg-color{
+    background-color:#6f42c1;
+}
+
+ul li{
+    margin-top: 15px;
+    list-style-type: none;
+    color: #ffffff;
+    font-size: 20px;
+    /* font-weight: 1000; */
+}
+.nav-a{
+    color: #ffffff;
+}
+.SignUpMsg{
+    color: rgb(0, 0, 0);
+    font-size: 20px;
+    text-align: center;
+    /* font-weight: bold;    */
+    /* float: right; */
+}
