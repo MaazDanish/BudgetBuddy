@@ -1,37 +1,70 @@
-const Sequelize = require('sequelize');
-const sequelize = require('../Util/database');
+const mongoose = require('mongoose');
 
-const User = sequelize.define('user', {
-    id: {
-        type: Sequelize.INTEGER,
-        autoIncrement: true,
-        allowNull: false,
-        primaryKey: true
-
-    },
+const userSchema = new mongoose.Schema({
     name: {
-        type: Sequelize.STRING,
-        allowNull: false
+        type: String,
+        required: true
     },
     email: {
-        type: Sequelize.STRING,
-        allowNull: false
+        type: String,
+        required: true
     },
     phoneNumber: {
-        type: Sequelize.STRING,
-        allowNull: false
+        type: String,
+        required: true
     },
     password: {
-        type: Sequelize.STRING,
-        allowNull: false
+        type: String,
+        required: true
     },
     ispremiumuser: {
-        type: Sequelize.STRING
+        type: String
     },
     totalExpense: {
-        type: Sequelize.INTEGER,
-        defaultValue: 0
+        type: Number,
+        default: 0
     }
-})
+});
+
+const User = mongoose.model('User', userSchema);
 
 module.exports = User;
+
+
+// const Sequelize = require('sequelize');
+// const sequelize = require('../Util/database');
+
+// const User = sequelize.define('user', {
+//     id: {
+//         type: Sequelize.INTEGER,
+//         autoIncrement: true,
+//         allowNull: false,
+//         primaryKey: true
+
+//     },
+//     name: {
+//         type: Sequelize.STRING,
+//         allowNull: false
+//     },
+//     email: {
+//         type: Sequelize.STRING,
+//         allowNull: false
+//     },
+//     phoneNumber: {
+//         type: Sequelize.STRING,
+//         allowNull: false
+//     },
+//     password: {
+//         type: Sequelize.STRING,
+//         allowNull: false
+//     },
+//     ispremiumuser: {
+//         type: Sequelize.STRING
+//     },
+//     totalExpense: {
+//         type: Sequelize.INTEGER,
+//         defaultValue: 0
+//     }
+// })
+
+// module.exports = User;
