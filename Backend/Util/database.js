@@ -1,7 +1,14 @@
-const Sequelize = require('sequelize');
+const mongoose = require('mongoose');
+const url = 'mongodb://127.0.0.1:27017/budgetBuddy'
 
-const sequelize = new Sequelize(process.env.DB_NAME, process.env.DB_USER, process.env.DB_PASSWORD, {
-    dialect: 'mysql', host: "localhost"
-});
 
-module.exports = sequelize;
+const connectToMongoDB = async () => {
+    try {
+        const connection = await mongoose.connect(url);
+        // console.log('database is connected successfully', connection);
+    } catch (er) {
+        console.log(er);
+    }
+}
+
+module.exports = connectToMongoDB;
