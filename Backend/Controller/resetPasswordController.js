@@ -50,6 +50,7 @@ exports.forgotPassword = async (req, res, next) => {
             text: `Your reset password link is here. Click it to change Password - http://localhost:4444/BudgetBuddy/user/password/reset-password/${uuid} This is valid for one time only.`
         }
 
+        
         transporter.sendMail(mailOptions, function (error, info) {
             if (error) {
                 console.log(error);
@@ -97,7 +98,7 @@ exports.updatingPassword = async (req, res, next) => {
         const { uuidd, password } = req.body;
 
         const fp = await forgotPassword.findOne({ where: { uuid: uuidd, isActive: true } })
-    
+
         const user = await User.findOne({ where: { id: fp.userId } })
 
         await fp.update({ isActive: false });
