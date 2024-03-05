@@ -37,7 +37,7 @@ exports.addExpenses = async (req, res, next) => {
 async function nextt(id, offset, itemsPerPage) {
     try {
         // console.log(id, offset, itemsPerPage, 'testing in nexttt');
-        const xpense = await Expense.find({ UserId: id }).
+        const xpense = await Expense.find({ userId: id }).
             limit(itemsPerPage).
             skip(offset);
 
@@ -88,12 +88,12 @@ async function nextt(id, offset, itemsPerPage) {
 exports.getExpenses = async (req, res, next) => {
     try {
         const itemsPerPage = Number(req.headers.pagenumber);
-        
+
         const of = ((req.query.page || 1) - 1);
         console.log(of);
 
-        // console.log(itemsPerPage, "Items per page");
-        // console.log(req.query.page, "Page number");
+        console.log(itemsPerPage, "Items per page");
+        console.log(req.query.page, "Page number");
 
         const expenses = await Expense.find({ userId: req.userID.userId })
             .skip(of * itemsPerPage)
@@ -102,23 +102,24 @@ exports.getExpenses = async (req, res, next) => {
         let pre, nex, prev, nextv;
         if (of === 0) {
             pre = false;
+            prev = of;
         } else {
             pre = true;
             prev = of;
         }
 
         const ans = await nextt(req.userID.userId, (of + 1) * itemsPerPage, itemsPerPage);
-        // console.log(ans);
+        console.log(ans, 'checking the function value');
         if (ans === true) {
             nex = true;
 
             nextv = Number(of) + Number(2);
-            console.log(nextv);
+            console.log(nextv, 'testing nextv');
         } else {
             nex = false;
         }
-        // console.log( pre, nex, nextv, prev);
-        console.log( expenses);
+        console.log(expenses,pre, nex, nextv, prev);
+        // console.log( expenses);
         res.status(200).json({ expenses, pre, nex, nextv, prev });
     } catch (err) {
         console.log(err);

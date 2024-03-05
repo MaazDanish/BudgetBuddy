@@ -112,6 +112,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         const prev = document.createElement('button');
 
 
+        console.log(expenses.data.pre,'get');
         if (expenses.data.pre === true) {
             prev.textContent = `${expenses.data.prev}`;
             prev.value = `${expenses.data.prev}`;
@@ -130,7 +131,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         const paginationButtonS = document.querySelectorAll('.pagination');
 
         paginationButtonS.forEach((button) => {
-            button.style.display = 'block';
+            button.style.display = 'inline-block';
         })
 
 
@@ -157,7 +158,7 @@ async function addXpense(event) {
         const xpense = await axios.post('http://localhost:4444/BudgetBuddy/expenses/addXpenses', xpensesObj);
 
         let e = { target: { value: 1 } }
-        getexpenseList(e);
+        getexpenseList(event);
         location.reload();
         clearFields(event);
     } catch (e) {
@@ -384,7 +385,7 @@ function showurl() {
         })
 }
 
-async function getexpenseList(e) {
+async function getexpenseList(event) {
     try {
 
         const headers = {
@@ -398,7 +399,7 @@ async function getexpenseList(e) {
         }
 
         console.log('hiiiiiiiiiiiiii');
-        const page = e.target.value;
+        const page = event.target.value;
 
         const expenses = await axios.get(`http://localhost:4444/BudgetBuddy/expenses/addXpenses?page=${page}`, { headers });
         console.log(expenses,'tetsing');
@@ -408,9 +409,9 @@ async function getexpenseList(e) {
             return;
         }
         tbody.innerHTML = ''
-        for (var i = 0; i < expenses.data.result.length; i++) {
-            displayXpenses(expenses.data.result[i]);
-            console.log(expenses.data);
+        for (var i = 0; i < expenses.data.expenses.length; i++) {
+            displayXpenses(expenses.data.expenses[i]);
+            // console.log(expenses.data);
         }
 
         const next = document.createElement('button');
