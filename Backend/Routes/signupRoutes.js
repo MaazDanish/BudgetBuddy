@@ -2,14 +2,13 @@ const express = require('express');
 
 const routes = express.Router();
 
-const signupController = require('../Controller/signupController');
-const resetPasswordController = require('../Controller/resetPasswordController');
-const authenticateToken = require('../Middleware/authentication');
+const signupController = require('../controllers/signupController');
+const resetPasswordController = require('../controllers/resetPasswordController');
+const authenticateToken = require('../middlewares/authentication');
 
 
 routes.post('/signup', signupController.postSignUpUser);
 routes.post('/signin', signupController.postSignIn);
-routes.post('/signInByNumber', signupController.signInByNumber);
 routes.get('/getUserInfo', authenticateToken, signupController.getUserInformation)
 routes.put('/editUserInfo', authenticateToken, signupController.updateUserInformation);
 

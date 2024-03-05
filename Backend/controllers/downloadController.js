@@ -1,14 +1,14 @@
 const AWS = require('aws-sdk');
 
-const Download = require('../Models/download');
-const Expense = require('../Models/xpense');
+const Download = require('../models/download');
+const Expense = require('../models/xpense');
 
 async function uploadToS3(data, filename) {
     let s3bucket = new AWS.S3({
         accessKeyId: process.env.ACCESS_KEY,
         secretAccessKey: process.env.SECRET_KEY
     })
-    
+
     var params = {
         Bucket: process.env.BUCKET_NAME,
         Key: filename,
@@ -29,7 +29,7 @@ exports.downloading = async (req, res, next) => {
     try {
 
         const uid = req.userID.userId;
-        const xpenses = await Expense.findAll({ where: { UserId: uid } });
+        const xpenses = await Expense.find({ UserId: uid });
 
         const stringFied = JSON.stringify(xpenses);
 
@@ -52,7 +52,7 @@ exports.downloading = async (req, res, next) => {
 exports.allURL = async (req, res, next) => {
     try {
         const id = req.userID.userId;
-        const download = await Download.findAll({ where: { UserId: id } });
+        const download = await Download.find({ UserId: id });
         res.status(200).json(download);
 
     } catch (err) {

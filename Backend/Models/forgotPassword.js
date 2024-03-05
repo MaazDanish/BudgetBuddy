@@ -10,40 +10,13 @@ const forgotPasswordSchema = new mongoose.Schema({
     required: true,
     default: true
   },
-  user: {
+  userId: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User', // Reference to the User model
     required: true
   }
 });
 
-const ForgotPassword = mongoose.model('ForgotPassword', forgotPasswordSchema);
+const ForgotPassword = mongoose.model('forgotpassword', forgotPasswordSchema);
 
 module.exports = ForgotPassword;
-
-
-
-
-// const Sequelize = require('sequelize');
-// const sequelize = require('../Util/database');
-
-// const forgotPassword = sequelize.define("resetPassword", {
-//     id: {
-//       type: Sequelize.INTEGER,
-//       autoIncrement: true,
-//       allowNull: false,
-//       primaryKey: true,
-//     },
-//     uuid: {
-//       type: Sequelize.STRING,
-//       allowNull: false,
-//     },
-//     isActive: {
-//       type: Sequelize.BOOLEAN,
-//       allowNull: false,
-//       defaultValue: 1,
-//     },
-//   });
-
-
-module.exports = forgotPassword;

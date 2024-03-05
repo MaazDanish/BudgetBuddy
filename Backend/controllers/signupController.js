@@ -1,7 +1,7 @@
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
-const User = require('../Models/signup');
+const User = require('../models/signup');
 
 exports.postSignUpUser = async (req, res, next) => {
     try {
@@ -9,7 +9,7 @@ exports.postSignUpUser = async (req, res, next) => {
         // const { firstName, lastName, email, phoneNumber, password, address } = req.body;
         const { name, email, phoneNumber, password } = req.body;
 
-        const existUser = await User.findOne({ where: { email } });
+        const existUser = await User.findOne({ email: email });
 
         if (existUser !== null) {
 
@@ -42,7 +42,7 @@ exports.postSignIn = async (req, res, next) => {
 
         const { email, password } = req.body;
 
-        const user = await User.findOne({ where: { email } });
+        const user = await User.findOne({ email: email });
 
         if (!user) {
 
@@ -56,7 +56,7 @@ exports.postSignIn = async (req, res, next) => {
 
             const payload = {
 
-                userId: user.id,
+                userId: user._id,
 
             };
 
@@ -76,48 +76,6 @@ exports.postSignIn = async (req, res, next) => {
     }
 }
 
-exports.signInByNumber = async (req, res, next) => {
-
-    try {
-
-        const { phoneNumber, password } = req.body;
-
-        const user = await User.findOne({ where: { phoneNumber: phoneNumber } });
-
-        if (!user) {
-
-            return res.status(404).json({ success: false, message: "User Not Found." })
-
-        }
-
-        const matchingPassword = await bcrypt.compare(password, user.password)
-
-        if (matchingPassword) {
-
-            const payload = {
-
-                userId: user.id,
-
-            };
-
-            let token = jwt.sign(payload, process.env.SECRET_KEY);
-
-            return res.status(200).json({ success: true, message: 'User LogIn Success', token: token, ispremiumuser: user.ispremiumuser })
-
-        } else {
-
-            return res.status(401).json({ success: false, message: 'Email or Password is incorrect' });
-
-        }
-
-    } catch (err) {
-
-        console.log(err);
-
-        res.status(500).json({ success: false, message: "Error Occured while verifying user for sign in" })
-
-    }
-}
 
 
 exports.getUserInformation = async (req, res, next) => {
@@ -132,8 +90,8 @@ exports.getUserInformation = async (req, res, next) => {
         const userId = req.userID.userId;
 
 
-        const user = await User.findOne({ where: { id: userId } });
-        console.log(user, 'user');
+        const user = await User.findOne({ _id: userId });
+        // console.log(user, 'user');
 
         if (!user) {
 
@@ -157,7 +115,7 @@ exports.updateUserInformation = async (req, res, next) => {
 
         const { name, email, phoneNumber } = req.body;
 
-        const user = await User.findOne({ where: { id: id } });
+        const user = await User.findOne({ _id: id });
 
 
         if (!user) {

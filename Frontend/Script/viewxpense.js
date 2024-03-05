@@ -4,13 +4,13 @@ function displayUserInformation(user) {
     document.getElementById('userInfo').innerHTML = `
     <p><h5>Name</h5> ${user.name} </p>
     <p><h5>Email</h5> ${user.email}</p>
-    <p><h5>Phone Number</h5> ${user.whiteumber}</p>
+    <p><h5>Phone Number</h5> ${user.phoneNumber}</p>
     
 `;
 }
 
 document.addEventListener('DOMContentLoaded', async () => {
-    if (localStorage.getItem('ispremium') === '1') {
+    if (localStorage.getItem('ispremium') === 'true') {
         var downloadbutton = document.getElementById('downloadbutton');
         downloadbutton.className = 'btn downloadLogo';
     }
@@ -20,13 +20,13 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     const user = await axios.get(`http://localhost:4444/BudgetBuddy/user/getUserInfo`, { headers });
     displayUserInformation(user.data.user);
-    
+
 
     const expenses = await axios.get('http://localhost:4444/BudgetBuddy/expenses/get-today-expense', { headers });
+    console.log(expenses);
+    for (var i = 0; i < expenses.data.expenses.length; i++) {
+        displayDTDXpense(expenses.data.expenses[i], expenses.data.totalExpense);
 
-    for (var i = 0; i < expenses.data.expense.length; i++) {
-        displayDTDXpense(expenses.data.expense[i], expenses.data.totalExpense);
-    
     }
 
     const weekly = await axios.get('http://localhost:4444/BudgetBuddy/expenses/get-weekly-expense', { headers });
@@ -38,6 +38,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
 async function displayDTDXpense(expenses, obj) {
     const { price, description, category, updatedAt } = expenses;
+    console.log(price);
     const dateTime = updatedAt;
     const date = dateTime.split('T')[0];
 
@@ -63,7 +64,7 @@ async function displayDTDXpense(expenses, obj) {
 
 async function weeklyXpenses(weekly) {
     var weeklyXpenses = document.getElementById('dailyXpenses');
-        weekly.data.dayNames.forEach(day => {
+    weekly.data.dayNames.forEach(day => {
         weeklyXpenses.innerHTML = weeklyXpenses.innerHTML + `
         <tr class="table-dark">
             <td class="text-white">${day}</td>
@@ -84,7 +85,7 @@ async function weeklyXpenses(weekly) {
 async function yearlyExpenses(yearly) {
     var monthlyExpense = document.getElementById('monthlyExpense');
 
-        yearly.data.monthNames.forEach(month => {
+    yearly.data.monthNames.forEach(month => {
         monthlyExpense.innerHTML = monthlyExpense.innerHTML + `
         <tr class="table-dark">
             <td class="text-white">${month}</td>
@@ -105,9 +106,9 @@ async function yearlyExpenses(yearly) {
 
 // Logout 
 // document.addEventListener('DOMContentLoaded', () => {
-    var logout = document.getElementById('logout');
-    logout.addEventListener('click', () => {
-        localStorage.removeItem('token');
-        window.location.href = './home.html';
-    })
+var logout = document.getElementById('logout');
+logout.addEventListener('click', () => {
+    localStorage.removeItem('token');
+    window.location.href = './home.html';
+})
 // })

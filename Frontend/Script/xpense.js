@@ -10,7 +10,8 @@ async function toggleEdit(user) {
         }
 
         const user = await axios.get(`http://localhost:4444/BudgetBuddy/user/getUserInfo`, { headers });
-        console.log(user);
+        // console.log(user);
+
         document.getElementById('editname').value = user.data.user.name;
         document.getElementById('editemail').value = user.data.user.email;
         document.getElementById('editphone').value = user.data.user.phoneNumber;
@@ -23,6 +24,7 @@ async function toggleEdit(user) {
 async function saveChanges() {
     try {
         console.log(document.getElementById('editname').value);
+
         const userInfo = {
             name: document.getElementById('editname').value,
             email: document.getElementById('editemail').value,
@@ -34,7 +36,7 @@ async function saveChanges() {
         }
 
         const user = await axios.put('http://localhost:4444/BudgetBuddy/user/editUserInfo', userInfo, { headers });
-        console.log(user.status);
+        // console.log(user.status);
         if (user.status === 200) {
             displayUserInformation(userInfo);
         }
@@ -54,17 +56,22 @@ function displayUserInformation(user) {
     <p class="text-color"><h5>Email</h5> ${user.email}</p>
     <p class="text-color"><h5>Phone Number</h5> ${user.phoneNumber}</p>
     `;
-
 }
 
 
 // when page reloads 
 document.addEventListener('DOMContentLoaded', async () => {
     try {
+        const ispremium = localStorage.getItem('ispremium');
+        // console.log(ispremium);
+        if (ispremium === 'true') {
+            var buyPremium = document.getElementById('buyPremium');
+            buyPremium.remove();
 
-        if (localStorage.getItem('ispremium') === '1') {
-            document.getElementById('buyPremium').textContent = 'Premium User';
-            document.getElementById('buyPremium').className = 'btn btn-primary ';
+            var vipButton = document.createElement('button');
+            vipButton.className = 'btn btn-primary';
+            vipButton.textContent = 'VIP';
+            document.getElementById('vip').appendChild(vipButton);
 
             var leaderboardButton = document.getElementById('leaderboardButton');
             leaderboardButton.removeAttribute('disabled');
@@ -95,9 +102,10 @@ document.addEventListener('DOMContentLoaded', async () => {
 
         const expenses = await axios.get('http://localhost:4444/BudgetBuddy/expenses/addXpenses?page=1', { headers });
 
-        for (var i = 0; i < expenses.data.result.length; i++) {
-
-            displayXpenses(expenses.data.result[i])
+        // console.log(expenses);
+        for (var i = 0; i < expenses.data.expenses.length; i++) {
+            // console.log(expenses.data.expenses[i]);
+            displayXpenses(expenses.data.expenses[i])
         }
 
         const next = document.createElement('button');
@@ -122,7 +130,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         const paginationButtonS = document.querySelectorAll('.pagination');
 
         paginationButtonS.forEach((button) => {
-            button.style.display = 'inline-block';
+            button.style.display = 'block';
         })
 
 
@@ -149,8 +157,8 @@ async function addXpense(event) {
         const xpense = await axios.post('http://localhost:4444/BudgetBuddy/expenses/addXpenses', xpensesObj);
 
         let e = { target: { value: 1 } }
-        getexpenseList(event);
-
+        getexpenseList(e);
+        location.reload();
         clearFields(event);
     } catch (e) {
         console.log(e);
@@ -162,9 +170,10 @@ async function displayXpenses(xpenses) {
     try {
 
         const { price, description, category, updatedAt } = xpenses;
-
+        // console.log(updatedAt);
         const dateTime = updatedAt;
         const date = dateTime.split('T')[0];
+        // console.log(date);
 
         const tbody = document.querySelector('#tbody');
 
@@ -193,7 +202,7 @@ async function displayXpenses(xpenses) {
         deleteButton.className = 'btn btn-light';
         deleteButton.value = 'Delete'
 
-        const id = xpenses.id;
+        const id = xpenses._id;
         deleteButton.addEventListener('click', async () => {
             deleteXpense(id);
         })
@@ -215,11 +224,11 @@ async function displayXpenses(xpenses) {
 // delete expense
 async function deleteXpense(id) {
     try {
-
+        console.log(id, 'testing in deletede fucntion of expense.js');
         const deletedXpense = await axios.post(`http://localhost:4444/BudgetBuddy/expenses/deleteXpenses/`, { id });
-        console.log('DELETED SUCCESSFULLY', deletedXpense);
         let e = { target: { value: 1 } };
         getexpenseList(e)
+        location.reload();
     } catch (err) {
         console.log(err);
     }
@@ -259,8 +268,8 @@ document.getElementById('buyPremium').addEventListener('click', async (event) =>
                 const result = await axios.post('http://localhost:4444/BudgetBuddy/buy-premium/updatetransactionstatus', { order_id: options.order_id, payment_id: res.razorpay_payment_id }, { headers });
                 console.log(result);
 
-                document.getElementById('buyPremium').textContent = 'VIP';
-                document.getElementById('buyPremium').className = 'btn btn-primary';
+                var buyPremium = document.getElementById('buyPremium');
+                buyPremium.remove();
 
                 var downloadbutton = document.getElementById('downloadbutton');
                 downloadbutton.classList.remove = 'disabled';
@@ -375,7 +384,7 @@ function showurl() {
         })
 }
 
-async function getexpenseList(event) {
+async function getexpenseList(e) {
     try {
 
         const headers = {
@@ -388,10 +397,11 @@ async function getexpenseList(event) {
             paginaton.removeChild(paginaton.firstChild);
         }
 
-        const page = event.target.value;
+        console.log('hiiiiiiiiiiiiii');
+        const page = e.target.value;
 
         const expenses = await axios.get(`http://localhost:4444/BudgetBuddy/expenses/addXpenses?page=${page}`, { headers });
-
+        console.log(expenses,'tetsing');
 
         if (expenses.data.length === 0) {
             alert('There is no data exist');
@@ -400,6 +410,7 @@ async function getexpenseList(event) {
         tbody.innerHTML = ''
         for (var i = 0; i < expenses.data.result.length; i++) {
             displayXpenses(expenses.data.result[i]);
+            console.log(expenses.data);
         }
 
         const next = document.createElement('button');

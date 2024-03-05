@@ -1,3 +1,5 @@
+
+
 let wrapper = document.querySelector('.wrapper'),
     signUpLink = document.querySelector('.link .signup-link'),
     signInLink = document.querySelector('.link .signin-link');
@@ -114,6 +116,7 @@ async function signin(event) {
         const res = await axios.post("http://localhost:4444/BudgetBuddy/user/signin", signin);
         clearFieldsOfSignin(event);
         if (res.status === 200) {
+            console.log(res.data.ispremiumuser);
             localStorage.setItem('token', res.data.token);
             localStorage.setItem('ispremium', res.data.ispremiumuser);
             window.location.href = './xpense.html';

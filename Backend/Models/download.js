@@ -10,29 +10,13 @@ const downloadSchema = new mongoose.Schema({
         type: Date,
         default: Date.now
     },
-    user: {
+    userId: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User' // Reference to the User model
     }
 });
 
 // Create the model
-const Download = mongoose.model('Download', downloadSchema);
+const Download = mongoose.model('download', downloadSchema);
 
 module.exports = Download;
-
-// const Sequelize = require('sequelize');
-// const sequelize = require('../Util/database');
-
-// const Download = sequelize.define('download', {
-//     id: {
-//         type: Sequelize.INTEGER,
-//         autoIncrement: true,
-//         allowNull: false,
-//         primaryKey: true
-//     },
-//     url: Sequelize.STRING,
-//     date: Sequelize.DATE
-// });
-
-// module.exports = Download;

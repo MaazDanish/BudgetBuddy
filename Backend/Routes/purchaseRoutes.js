@@ -2,9 +2,9 @@ const express = require('express')
 
 const router = express.Router()
 
-const authenticateToken = require('../Middleware/authentication');
+const authenticateToken = require('../middlewares/authentication');
 
-const premiumController = require('../Controller/buypremiumController')
+const premiumController = require('../controllers/buyPremiumController')
 
 router.get('/buypremium', authenticateToken, premiumController.purchasepremium)
 
