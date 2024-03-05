@@ -411,7 +411,7 @@ async function getexpenseList(event) {
         tbody.innerHTML = ''
         for (var i = 0; i < expenses.data.expenses.length; i++) {
             displayXpenses(expenses.data.expenses[i]);
-            // console.log(expenses.data);
+            // console.log(expenses.data);\     
         }
 
         const next = document.createElement('button');

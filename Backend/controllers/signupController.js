@@ -5,8 +5,6 @@ const User = require('../models/signup');
 
 exports.postSignUpUser = async (req, res, next) => {
     try {
-
-        // const { firstName, lastName, email, phoneNumber, password, address } = req.body;
         const { name, email, phoneNumber, password } = req.body;
 
         const existUser = await User.findOne({ email: email });
@@ -91,8 +89,6 @@ exports.getUserInformation = async (req, res, next) => {
 
 
         const user = await User.findOne({ _id: userId });
-        // console.log(user, 'user');
-
         if (!user) {
 
             return res.status(404).json({ success: false, message: 'User not found' });
@@ -111,7 +107,6 @@ exports.getUserInformation = async (req, res, next) => {
 exports.updateUserInformation = async (req, res, next) => {
     try {
         const id = req.userID.userId;
-
 
         const { name, email, phoneNumber } = req.body;
 

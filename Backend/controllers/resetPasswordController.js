@@ -96,10 +96,10 @@ exports.resetPassword = async (req, res, next) => {
 exports.updatingPassword = async (req, res, next) => {
     try {
         const { uuidd, password } = req.body;
-        // console.log(uuidd);
+
 
         const fp = await forgotPassword.findOne({ uuid: uuidd, isActive: true })
-        // console.log(fp);
+
         const userId = fp.userId;
 
         const user = await User.findOne({ _id: userId })
